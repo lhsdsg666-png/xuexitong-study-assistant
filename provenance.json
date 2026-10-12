@@ -1,0 +1,10 @@
+{
+  "upstream": "https://github.com/Cooanyh/chaoxing-list",
+  "commit": "dd823449f0942f006e70721ddfc214659f406756",
+  "upstreamVersion": "2.4.9",
+  "assistantVersion": "0.1.0",
+  "reviewDate": "2026-10-12",
+  "upstreamFileSha256": "0cd80b2642e35449efca6de071dfbb18a8b9318d2511f40fc268e311fbcdbd0e",
+  "buildSha256": "1cec3496713be46b2523ff5f3671c4fb064eeb14a07bcd6d05f8e33102a767c2",
+  "license": "AGPL-3.0-or-later"
+}

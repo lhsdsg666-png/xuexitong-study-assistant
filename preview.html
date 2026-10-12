@@ -1,0 +1,12 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>学习通个人助手 · 本地演示</title>
+<style>body{margin:0;background:#e9e8e1;color:#213936;font-family:"Microsoft YaHei",sans-serif}article{max-width:690px;margin:12vh 40px;padding:36px}small{letter-spacing:4px;color:#686c56}h1{font-family:SimSun,serif;font-size:44px;line-height:1.3}p{max-width:390px;line-height:1.9;color:#647166}button{border:1px solid #b6baa4;border-radius:8px;background:#f9f7ec;padding:11px 15px;color:#2d5046;cursor:pointer;margin:8px 8px 0 0}@media(max-width:900px){article{margin:20px;padding:15px}h1{font-size:28px}}</style>
+<article><small>本地演示 / 0.1</small><h1>提醒有依据，<br>分数有记录。</h1><p>这是用示例数据展示功能的预览页。真实课程数据由安装后的用户脚本读取，此页面没有连接学习通账号。</p><button id="submit-demo">演示：作业已提交</button><button id="score-demo">演示：积分再减少2分</button><button id="fail-demo">演示：数据读取失败</button></article>
+<script src="source/coach.js"></script><script>
+const now=Date.now();let callback;
+let demo={sourceStatus:'作业：演示已读取；考试：演示已读取',coursesFresh:true,courses:[{courseId:1,clazzId:2,cpi:9,courseName:'操作系统',courseScore:'-2分'},{courseId:2,clazzId:3,cpi:8,courseName:'数据库原理',courseScore:'6分'}],items:[{courseId:1,clazzId:2,workId:7,type:'作业',course:'操作系统',title:'第三章 · 进程与线程练习',status:'未交',deadlineMs:now+95*60000,link:'https://i.chaoxing.com/'},{courseId:2,clazzId:3,examId:10,type:'考试',course:'数据库原理',title:'阶段测验：关系代数',status:'未开始',deadlineMs:now+21*3600000,phase:'start',link:'https://i.chaoxing.com/'},{courseId:3,workId:11,type:'作业',course:'计算机网络',title:'实验报告 · TCP连接分析',status:'待互评',leftTime:'',link:'https://i.chaoxing.com/'}]};
+const demoMemory=new Map();const demoStorage={getItem:k=>demoMemory.get(k)||null,setItem:(k,v)=>demoMemory.set(k,v)};
+const controller=CXStudyCoach.mount({demo:true,storage:demoStorage,getSnapshot:()=>demo,subscribe:fn=>{callback=fn;return()=>{};},refresh:async()=>{demo.sourceStatus='作业：演示已读取；考试：演示已读取';}});
+document.querySelector('#submit-demo').onclick=()=>{demo.items[0].status='待批阅';callback();};
+document.querySelector('#score-demo').onclick=()=>{demo.courses[0].courseScore=String(Number(demo.courses[0].courseScore.replace('分',''))-2)+'分';callback();};
+document.querySelector('#fail-demo').onclick=()=>{demo.sourceStatus='作业：读取失败，请核对原页；考试：读取失败';demo.coursesFresh=false;callback();};
+</script></html>

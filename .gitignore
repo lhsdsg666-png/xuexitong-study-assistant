@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
+.env
+.env.*
+node_modules/
+work/
+学习通积分记录*.json
